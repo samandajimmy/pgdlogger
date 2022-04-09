@@ -23,13 +23,11 @@ var (
 	requestId = ""
 )
 
-type loglevel string
-
 func NewLogger(reqId string) {
 	requestId = reqId
 }
 
-func Init(loglvl loglevel) {
+func Init(loglvl string) {
 	logrus.SetReportCaller(true)
 	formatter := &logrus.JSONFormatter{
 		TimestampFormat: timestampFormat,
@@ -48,7 +46,7 @@ func Init(loglvl loglevel) {
 	// default log level
 	logLevel := logrus.DebugLevel
 	logrus.SetLevel(logLevel)
-	logLevel, err := logrus.ParseLevel(string(loglvl))
+	logLevel, err := logrus.ParseLevel(loglvl)
 
 	if err != nil {
 		Make().Debug(err)
