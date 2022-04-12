@@ -1,4 +1,4 @@
-package logger
+package pgdlogger
 
 import (
 	"fmt"
@@ -23,10 +23,6 @@ var (
 	requestId = ""
 )
 
-func NewLogger(reqId string) {
-	requestId = reqId
-}
-
 func Init(loglvl string) {
 	logrus.SetReportCaller(true)
 	formatter := &logrus.JSONFormatter{
@@ -50,16 +46,28 @@ func Init(loglvl string) {
 
 	if err != nil {
 		Make().Debug(err)
+		return
 	}
 
 	logrus.SetLevel(logLevel)
 }
 
+func SetRequestId(reqId string) {
+	requestId = reqId
+}
+
+func GetRequestId() string {
+	return requestId
+}
+
 func Make(data ...map[string]interface{}) *logrus.Entry {
 	dataMap := map[string]interface{}{}
 	logField := logrus.Fields{}
-	logField[fieldKeyRequestId] = requestId
 	logrus.SetReportCaller(true)
+
+	if requestId != "" {
+		logField[fieldKeyRequestId] = requestId
+	}
 
 	if len(data) > 0 {
 		dataMap = data[0]
