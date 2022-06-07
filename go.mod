@@ -1,4 +1,4 @@
-module repo.pegadaian.co.id/ms-pds/modules/pgdlogger
+module github.com/samandajimmy/pgdlogger
 
 go 1.17
 

@@ -4,9 +4,9 @@ import (
 	"io/ioutil"
 	"testing"
 
+	"github.com/samandajimmy/pgdlogger"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
-	"repo.pegadaian.co.id/ms-pds/modules/pgdlogger"
 )
 
 func TestSetRequestId(t *testing.T) {
